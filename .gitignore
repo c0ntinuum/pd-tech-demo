@@ -195,12 +195,16 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 
-# Debug.
+# Debug
 PdTechDemo.Web/npm-debug.log
 
-# External libraries.
+# External Libraries
 PdTechDemo.Web/node_modules/
 PdTechDemo.Web/src/lib/
 
-# Compiled css.
+# Compiled CSS
 PdTechDemo.Web/src/css/
+
+# WebStorm
+PdTechDemo.Web/.idea/
+

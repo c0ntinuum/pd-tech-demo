@@ -1,8 +1,4 @@
-import Foo from './foo';
+(function iife(angular) {
+  var app = angular.module('PdTechDemo', []);
 
-let foo = new Foo();
-
-let textNode = document.createTextNode(foo.doSomething());
-document.body.appendChild(textNode);
-
-export var hello = 'es6';
+}(window.angular));

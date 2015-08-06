@@ -29,7 +29,13 @@ global.paths = {
   // Compiled CSS folder.
   'css': './src/css',
   // Distribution folder.
-  'dist': './dist'
+  'dist': './dist',
+  // Features CSS.
+  'features-sass': './src/features/**/*.scss',
+  // Features HTML.
+  'features-html': './src/features/**/*.tpl.html',
+  // Features HTML.
+  'features-js': './src/features/**/*.js',
 };
 
 // Require all tasks in the 'gulp' folder.

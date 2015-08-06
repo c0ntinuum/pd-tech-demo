@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
 
-namespace PdTechDemo.Web
+namespace PdTechDemo.Api
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

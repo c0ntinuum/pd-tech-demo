@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace PdTechDemo.Web
+namespace PdTechDemo.Api
 {
     public static class WebApiConfig
     {

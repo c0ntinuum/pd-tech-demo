@@ -1,45 +1,29 @@
-'use strict';
-
-/*
- * gulpfile.js
- * ===========
- * Rather than manage one giant configuration file responsible
- * for creating multiple tasks, each task has been broken out into
- * its own file in the 'gulp' folder. Any files in that directory get
- *  automatically required below.
- *
- * To add a new task, simply add a new task file in that directory.
+/**
+ *  Welcome to your gulpfile!
+ *  The gulp tasks are splitted in several files in the gulp directory
+ *  because putting all here was really too long
  */
 
+'use strict';
+
 var gulp = require('gulp');
-var requireDir = require('require-dir');
+var wrench = require('wrench');
 
-// Specify paths & globbing patterns for tasks.
-global.paths = {
-  // HTML sources.
-  'html': './src/*.html',
-  // JS sources.
-  'js': './src/js/**/*.js',
-  // SASS sources.
-  'sass': './src/scss/**/*.scss',
-  // Image sources.
-  'img': './src/img/*',
-  // Sources folder.
-  'src': './src',
-  // Compiled CSS folder.
-  'css': './src/css',
-  // Distribution folder.
-  'dist': './dist',
-  // Features CSS.
-  'features-sass': './src/features/**/*.scss',
-  // Features HTML.
-  'features-html': './src/features/**/*.tpl.html',
-  // Features HTML.
-  'features-js': './src/features/**/*.js',
-};
+/**
+ *  This will load all js or coffee files in the gulp directory
+ *  in order to load all gulp tasks
+ */
+wrench.readdirSyncRecursive('./gulp').filter(function(file) {
+  return (/\.(js|coffee)$/i).test(file);
+}).map(function(file) {
+  require('./gulp/' + file);
+});
 
-// Require all tasks in the 'gulp' folder.
-requireDir('./gulp', { recurse: false });
 
-// Default task; start local server & watch for changes.
-gulp.task('default', ['build', 'connect', 'watch']);
+/**
+ *  Default task clean temporaries directories and launch the
+ *  main optimization build task
+ */
+gulp.task('default', ['clean'], function () {
+  gulp.start('build');
+});

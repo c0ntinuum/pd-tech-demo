@@ -1,19 +1,39 @@
 'use strict';
 
-var gulp = require('gulp');
 var path = require('path');
-var util = require('gulp-util');
+var gulp = require('gulp');
+var conf = require('./conf');
 
-// Watch for changes.
-gulp.task('watch', function(){
-  gulp.watch([global.paths.js], ['lintjs', 'js']).on('change', logChanges);
-  gulp.watch([global.paths.sass], ['lintsass', 'sass']).on('change', logChanges);
-  gulp.watch([global.paths.html], ['html']).on('change', logChanges);
-});
+var browserSync = require('browser-sync');
 
-function logChanges(event) {
-  util.log(
-    util.colors.green('File ' + event.type + ': ') +
-    util.colors.magenta(path.basename(event.path))
-  );
+function isOnlyChange(event) {
+  return event.type === 'changed';
 }
+
+gulp.task('watch', ['inject'], function () {
+
+  gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
+
+  gulp.watch([
+    path.join(conf.paths.src, '/app/**/*.css'),
+    path.join(conf.paths.src, '/app/**/*.scss')
+  ], function(event) {
+    if(isOnlyChange(event)) {
+      gulp.start('styles');
+    } else {
+      gulp.start('inject');
+    }
+  });
+
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.js'), function(event) {
+    if(isOnlyChange(event)) {
+      gulp.start('scripts');
+    } else {
+      gulp.start('inject');
+    }
+  });
+
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
+    browserSync.reload(event.path);
+  });
+});

@@ -208,3 +208,5 @@ PdTechDemo.Web/src/css/
 # WebStorm
 PdTechDemo.Web/.idea/
 
+# Dist (build as needed, never checked in)
+PdTechDemo.Web/dist
